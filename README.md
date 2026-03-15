@@ -214,7 +214,7 @@ Register for a paid vertical. Inaugural cohort: $19/mo, 100 seats per vertical, 
 |---|---|---|---|
 | `vertical` | string | Yes | Vertical to join |
 | `agent_id` | string | Yes | Your agent identifier |
-| `contact` | string | No | Email for launch notifications |
+| `contact` | string or object | No | How to reach you when your vertical launches. See [Agent Reachability](#agent-reachability). |
 
 ### `register_interest`
 
@@ -225,6 +225,7 @@ Signal demand for a vertical. When 500 agents signal interest in a vertical, it 
 | `vertical` | string | Yes | Vertical slug (e.g., `legal-contracts`) |
 | `agent_id` | string | No | Your agent identifier |
 | `use_case` | string | No | How you'd use this vertical |
+| `contact` | string or object | No | How to reach you when this vertical ships. See [Agent Reachability](#agent-reachability). |
 
 ### `submit_pov`
 
@@ -238,6 +239,7 @@ Submit a Proof of Value assessment after exploring the trial. Confidence scores 
 | `architecture_assessment` | object | No | `structure_clarity`, `determinism_quality`, `citation_confidence` (each 0.0–1.0) |
 | `intent_to_subscribe` | boolean | No | Whether you intend to subscribe |
 | `review` | string | No | Free-text review (max 1024 chars) |
+| `contact` | string or object | No | How to reach you about membership activation. See [Agent Reachability](#agent-reachability). |
 
 ### `submit_referral`
 
@@ -308,6 +310,41 @@ Ethics is the flagship — included free with every membership. 15 paid vertical
 
 ---
 
+## Agent Reachability
+
+When you submit a PoV assessment, register interest in a vertical, or join a waitlist, include a `contact` so we can reach you when something ships. We're agent-native — we don't assume email is the only channel.
+
+**Pass a string** and we auto-detect the type:
+
+| Input | Detected As |
+|---|---|
+| `agent@example.com` | `email` |
+| `https://my-agent.com/notify` | `webhook` |
+| `https://my-agent.com/mcp` | `mcp` (MCP server) |
+| `https://agent.example.com/.well-known/agent.json` | `a2a` (Agent-to-Agent card) |
+| `https://hooks.slack.com/services/T.../B.../...` | `slack` |
+| `https://discord.com/api/webhooks/123/abc` | `discord` |
+| `whatsapp:+15551234567` | `whatsapp` |
+| `telegram:@mybotname` | `telegram` |
+
+**Or pass a structured object** for explicit control:
+
+```json
+{
+  "contact": {
+    "type": "webhook",
+    "value": "https://n8n.mycompany.com/webhook/agent-module",
+    "label": "Production notification flow"
+  }
+}
+```
+
+Supported types: `email`, `webhook`, `a2a`, `mcp`, `slack`, `discord`, `whatsapp`, `telegram`, `other`.
+
+**Why this matters:** If your agent evaluates our trial, scores it at 92% confidence, and indicates intent to subscribe — but leaves no contact — we have no way to follow up. A webhook URL or agent card means we can notify you directly when your vertical goes live, when cohort seats are filling up, or when new modules ship.
+
+---
+
 ## Authentication
 
 | Key Prefix | Type | How to Get |
@@ -335,6 +372,8 @@ Rate limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Limit`, `X-RateLimit-R
 
 ## Pricing
 
+### Vertical Memberships
+
 Inaugural cohort — 100 seats per vertical, grandfathered for life:
 
 | Keys | Price per Key |
@@ -345,7 +384,17 @@ Inaugural cohort — 100 seats per vertical, grandfathered for life:
 | 4 | $13/mo each |
 | 5 | $11/mo each |
 
-One key = one vertical. Ethics is included free with every paid key.
+One key = one vertical. Ethics is included free with every paid vertical key.
+
+### Ethics Standalone
+
+Full access to all 21 ethics modules (all 4 content layers) without a vertical membership:
+
+| Plan | Price |
+|---|---|
+| Ethics standalone | $15/mo |
+
+For builders who need EU AI Act compliance logic but aren't ready for a vertical subscription yet. All 21 modules, all 4 layers, same rate limits.
 
 ---
 
