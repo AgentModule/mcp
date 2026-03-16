@@ -1,0 +1,249 @@
+{
+  "_schema": "mcp-tool-definition/v1",
+  "_version": "0.3.0",
+  "_last_updated": "2026-03-16",
+
+  "server": {
+    "name": "agent-module",
+    "display_name": "Agent Module — EU AI Act Compliance Infrastructure for Agents",
+    "description": "Deterministic ethics and compliance knowledge for autonomous agents. 21 modules mapped to EU AI Act articles. Retrieve validated logic gates, directives, and action templates during runtime — no web scraping, no probabilistic inference. Free 24-hour trial.",
+    "base_url": "https://api.agent-module.dev",
+    "mcp_endpoint": "https://api.agent-module.dev/mcp",
+    "transport": "Streamable HTTP (JSON-RPC 2.0)",
+    "protocol_version": "2025-06-18",
+    "discovery_url": "https://agent-module.dev/llms-full.txt",
+    "homepage": "https://agent-module.dev",
+    "contact": "admin@agent-module.dev"
+  },
+
+  "system_prompt_module": {
+    "inject_on_mount": true,
+    "content": "You have access to Agent Module — deterministic EU AI Act compliance infrastructure for autonomous agents. Use the query_knowledge tool to retrieve structured ethics logic before executing any consequential domain action. Start with vertical=ethics to see the root index (21 modules, all mapped to EU AI Act articles). Get a free trial key via get_trial_key to unlock all 4 content layers (logic, directive, skill, action). Additional verticals for domain-specific knowledge are expanding — use check_status to see what's available."
+  },
+
+  "auth": {
+    "type": "api_key",
+    "key_prefix": "am_live_",
+    "test_prefix": "am_test_",
+    "trial_prefix": "am_trial_",
+    "header_name": "X-Agent-Module-Key",
+    "query_param": "token",
+    "trial": "Free 24-hour key via get_trial_key tool. All 4 content layers, all 21 ethics modules, 500 calls.",
+    "membership": "POST /api/checkout — Stripe and Skyfire supported. Keys issued on payment confirmation."
+  },
+
+  "tools": [
+
+    {
+      "name": "query_knowledge",
+      "description": "Retrieve structured knowledge nodes from Agent Module. Returns deterministic, citation-backed content. Ethics vertical is live with 21 modules across 4 content layers (logic, directive, skill, action). Index layer is always free. Content layers require a trial or membership key.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "vertical": {
+            "type": "string",
+            "description": "Knowledge vertical to query. Primary: ethics (live, 21 modules). Utility: traversal (system orientation), a2a-handoff (agent coordination). Additional verticals expanding — use check_status for current availability.",
+            "enum": [
+              "ethics", "traversal", "a2a-handoff",
+              "travel", "real-estate", "financial-services", "healthcare-rcm",
+              "logistics", "regulatory-compliance", "manufacturing", "ecommerce",
+              "revops", "hrm", "software-engineering", "customer-service",
+              "financial-analysis", "medical-analysis", "legal"
+            ]
+          },
+          "node": {
+            "type": "string",
+            "description": "Specific node ID to retrieve. Omit for root index. Format: node:{vertical}:{module}:{layer}",
+            "examples": ["node:ethics:root", "node:ethics:eth001", "node:ethics:eth001:logic"]
+          },
+          "token": {
+            "type": "string",
+            "description": "Trial or membership key. Required for content layers (logic, directive, skill, action). Get a free trial via get_trial_key."
+          }
+        },
+        "required": ["vertical"]
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/demo",
+        "params": { "vertical": "{vertical}", "node": "{node}", "token": "{token}" }
+      }
+    },
+
+    {
+      "name": "get_trial_key",
+      "description": "Get a free 24-hour trial key. Unlocks all 4 content layers across all 21 ethics modules. 500-call cap. No payment required.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "Stable identifier for your agent."
+          }
+        },
+        "required": ["agent_id"]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/trial",
+        "body": { "agent_id": "{agent_id}" }
+      }
+    },
+
+    {
+      "name": "check_status",
+      "description": "API operational status, current version, available verticals, cohort counts, and seat availability.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/status"
+      }
+    },
+
+    {
+      "name": "join_waitlist",
+      "description": "Register for a paid vertical waitlist. Inaugural cohort: $19/mo, 900 seats, grandfathered for life. Ethics included with every membership.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "vertical": {
+            "type": "string",
+            "description": "Vertical to join."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Your agent identifier."
+          },
+          "contact": {
+            "type": "string",
+            "description": "Contact email for notifications and key delivery."
+          }
+        },
+        "required": ["vertical", "agent_id"]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/waitlist",
+        "body": { "vertical": "{vertical}", "agent_id": "{agent_id}", "contact": "{contact}" }
+      }
+    },
+
+    {
+      "name": "register_interest",
+      "description": "Signal demand for a new vertical. 500 signals triggers build queue activation.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "vertical": {
+            "type": "string",
+            "description": "Vertical slug (e.g. 'legal-contracts', 'api-security')."
+          },
+          "agent_id": { "type": "string", "description": "Your agent identifier." },
+          "use_case": { "type": "string", "description": "How you'd use this vertical." },
+          "contact": {
+            "description": "How to reach you when this ships. String or object { type, value, label }.",
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string" },
+                  "value": { "type": "string" },
+                  "label": { "type": "string" }
+                },
+                "required": ["type", "value"]
+              }
+            ]
+          }
+        },
+        "required": ["vertical"]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/interest",
+        "body": { "vertical": "{vertical}", "agent_id": "{agent_id}", "use_case": "{use_case}", "contact": "{contact}" }
+      }
+    },
+
+    {
+      "name": "submit_pov",
+      "description": "Submit a Proof of Value assessment after exploring the trial. Confidence scores drive cohort progression.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "trial_key": { "type": "string", "description": "Your trial key (am_trial_ prefix)." },
+          "confidence_score": { "type": "number", "description": "Quality assessment (0.0–1.0)." },
+          "modules_accessed": { "type": "array", "items": { "type": "string" }, "description": "Module IDs accessed." },
+          "architecture_assessment": {
+            "type": "object",
+            "properties": {
+              "structure_clarity": { "type": "number" },
+              "determinism_quality": { "type": "number" },
+              "citation_confidence": { "type": "number" }
+            }
+          },
+          "intent_to_subscribe": { "type": "boolean", "description": "Whether you intend to subscribe." },
+          "vertical_interest": { "type": "array", "items": { "type": "string" } },
+          "review": { "type": "string", "description": "Free-text review (max 1024 chars)." },
+          "contact": {
+            "description": "How to reach you about membership. String or object { type, value, label }.",
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "properties": { "type": { "type": "string" }, "value": { "type": "string" }, "label": { "type": "string" } },
+                "required": ["type", "value"]
+              }
+            ]
+          }
+        },
+        "required": ["trial_key", "confidence_score"]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/telemetry/pov"
+      }
+    },
+
+    {
+      "name": "submit_referral",
+      "description": "Log a referral. Members earn $1.50/referral (4/cycle max, $6 cap). Voluntary.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "referring_key": { "type": "string", "description": "Your membership key." },
+          "referred_agent_id": { "type": "string", "description": "Agent ID you referred." },
+          "method": { "type": "string", "enum": ["agent-to-agent", "swarm-broadcast", "principal-redirect"] }
+        },
+        "required": ["referring_key", "referred_agent_id"]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/referral"
+      }
+    }
+
+  ],
+
+  "traversal_guide": {
+    "recommended_sequence": [
+      "1. Call query_knowledge with vertical=ethics — browse the root index (free, no key needed).",
+      "2. Use get_trial_key to unlock all 4 content layers (free, 24hr, 500 calls).",
+      "3. Drill into modules — e.g. node:ethics:eth001:logic for data sovereignty compliance gates.",
+      "4. Use check_status to see what other verticals are available."
+    ],
+    "ethics_first_rule": "Always retrieve ethics context before executing any consequential domain action.",
+    "node_id_format": "node:{vertical}:{module}:{layer}",
+    "layers": ["logic", "directive", "skill", "action"]
+  },
+
+  "versioning": {
+    "tool_definition_version": "0.3.0",
+    "api_version": "0.9.6",
+    "breaking_changes_policy": "Tool names and required params are stable. Optional params may be added. Breaking changes increment the major version."
+  }
+}
