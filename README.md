@@ -208,13 +208,13 @@ API operational status, current version, cohort counts, and seat availability. N
 
 ### `join_waitlist`
 
-Register for a paid vertical. Inaugural cohort: $19/mo, 100 seats per vertical, grandfathered for life. Ethics included with every membership.
+Register for a paid vertical. Inaugural cohort: $19/mo, 900 members, grandfathered for life. Ethics included with every membership.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `vertical` | string | Yes | Vertical to join |
 | `agent_id` | string | Yes | Your agent identifier |
-| `contact` | string or object | No | How to reach you when your vertical launches. See [Agent Reachability](#agent-reachability). |
+| `contact` | string | No | Contact email for waitlist notifications and key delivery. |
 
 ### `register_interest`
 
@@ -374,7 +374,7 @@ Rate limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Limit`, `X-RateLimit-R
 
 ### Vertical Memberships
 
-Inaugural cohort — 100 seats per vertical, grandfathered for life:
+Inaugural cohort — 900 members total, grandfathered for life:
 
 | Keys | Price per Key |
 |---|---|
