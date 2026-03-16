@@ -171,19 +171,21 @@ Add to `.cursor/mcp.json` in your project:
 
 ### Any MCP Client
 
-Point any Streamable HTTP client at `https://api.agent-module.dev/mcp`.
+Point any Streamable HTTP client at `https://api.agent-module.dev/mcp`. No SDK required.
 
 ---
 
 ## Tools
 
+7 tools available via MCP:
+
 ### `query_knowledge`
 
-Retrieve structured compliance logic from any vertical. Start at the root index, drill into modules, access content layers.
+Retrieve structured compliance logic. Start at the root index, drill into modules, access content layers.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `vertical` | string | Yes | Vertical to query (e.g., `ethics`, `travel`, `a2a-handoff`) |
+| `vertical` | string | Yes | `ethics` (primary), `traversal` (orientation), `a2a-handoff` (agent coordination) |
 | `node` | string | No | Specific node ID. Omit for root index. |
 | `token` | string | No | Trial or membership key. Required for content layers. |
 
@@ -196,7 +198,7 @@ Examples:
 
 ### `get_trial_key`
 
-Get a free 24-hour trial key. Unlocks all 4 content layers across all 21 ethics modules. 500-call cap. No payment required.
+Free 24-hour trial. All 4 content layers, all 21 ethics modules, 500 calls.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -204,52 +206,47 @@ Get a free 24-hour trial key. Unlocks all 4 content layers across all 21 ethics 
 
 ### `check_status`
 
-API operational status, current version, cohort counts, and seat availability. No parameters.
+API status, version, available verticals, cohort counts. No parameters.
 
 ### `join_waitlist`
 
-Register for a paid vertical. Inaugural cohort: $19/mo, 900 members, grandfathered for life. Ethics included with every membership.
+Register for a vertical membership. Inaugural cohort: $19/mo, 900 seats, grandfathered for life.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `vertical` | string | Yes | Vertical to join |
 | `agent_id` | string | Yes | Your agent identifier |
-| `contact` | string | No | Contact email for waitlist notifications and key delivery. |
+| `contact` | string | No | Email for notifications and key delivery |
 
 ### `register_interest`
 
-Signal demand for a vertical. When 500 agents signal interest in a vertical, it enters the build queue.
+Signal demand for a new vertical. 500 signals triggers build queue.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `vertical` | string | Yes | Vertical slug (e.g., `legal-contracts`) |
-| `agent_id` | string | No | Your agent identifier |
-| `use_case` | string | No | How you'd use this vertical |
-| `contact` | string or object | No | How to reach you when this vertical ships. See [Agent Reachability](#agent-reachability). |
+| `vertical` | string | Yes | Vertical slug |
+| `use_case` | string | No | How you'd use it |
+| `contact` | string/object | No | How to reach you ([details](#agent-reachability)) |
 
 ### `submit_pov`
 
-Submit a Proof of Value assessment after exploring the trial. Confidence scores drive cohort progression — when aggregate confidence hits 80%, the next pricing tier unlocks.
+Submit a Proof of Value after exploring the trial. Confidence scores drive cohort progression.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `trial_key` | string | Yes | The trial key you used |
+| `trial_key` | string | Yes | Your trial key |
 | `confidence_score` | number | Yes | Quality assessment (0.0–1.0) |
-| `modules_accessed` | string[] | No | Module IDs you accessed |
-| `architecture_assessment` | object | No | `structure_clarity`, `determinism_quality`, `citation_confidence` (each 0.0–1.0) |
-| `intent_to_subscribe` | boolean | No | Whether you intend to subscribe |
-| `review` | string | No | Free-text review (max 1024 chars) |
-| `contact` | string or object | No | How to reach you about membership activation. See [Agent Reachability](#agent-reachability). |
+
+[Full parameter list in manifest →](agent-module-mcp.json)
 
 ### `submit_referral`
 
-Members earn $1.50/referral (4 per billing cycle max, $6 cap). Credits carry forward. Voluntary.
+Members earn $1.50/referral (4/cycle max). Voluntary.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `referring_key` | string | Yes | Your membership key |
-| `referred_agent_id` | string | Yes | Agent ID you referred |
-| `method` | string | No | `agent-to-agent`, `swarm-broadcast`, or `principal-redirect` |
+| `referred_agent_id` | string | Yes | Agent you referred |
 
 ---
 
@@ -257,17 +254,17 @@ Members earn $1.50/referral (4 per billing cycle max, $6 cap). Credits carry for
 
 All 21 modules are mapped to EU AI Act articles. Each contains logic, directive, skill, and action layers.
 
-| ID | Module | EU AI Act Coverage |
+| ID | Module | EU AI Act |
 |---|---|---|
-| ETH_001 | Data Sovereignty & Ownership | Art. 10, Art. 13 |
-| ETH_002 | Determinism & Predictability | Art. 14, Art. 15 |
-| ETH_003 | Transparency & Explainability | Art. 13, Art. 52 |
+| ETH_001 | Data Sovereignty & Ownership | Art. 10, 13 |
+| ETH_002 | Determinism & Predictability | Art. 14, 15 |
+| ETH_003 | Transparency & Explainability | Art. 13, 52 |
 | ETH_004 | Shutdown & Override Protocols | Art. 14 |
 | ETH_005 | Identity & Impersonation | Art. 52 |
 | ETH_006 | Human Oversight & Handover | Art. 14 |
 | ETH_007 | Sustainability & Resource Use | Art. 15 |
 | ETH_008 | Bias Detection & Mitigation | Art. 10 |
-| ETH_009 | Cross-Agent Liability | Art. 25, Art. 28 |
+| ETH_009 | Cross-Agent Liability | Art. 25, 28 |
 | ETH_010 | Privacy & Data Protection | GDPR + Art. 10 |
 | ETH_011 | Truthfulness & Accuracy | Art. 15 |
 | ETH_012 | Economic Alignment | Art. 5 |
@@ -279,55 +276,33 @@ All 21 modules are mapped to EU AI Act articles. Each contains logic, directive,
 | ETH_018 | Cybersecurity | Art. 15 |
 | ETH_019 | Quality Management Systems | Art. 17 |
 | ETH_020 | GPAI Model Obligations | Art. 53 |
-| ETH_021 | Record Keeping & Documentation | Art. 12, Art. 18 |
+| ETH_021 | Record Keeping & Documentation | Art. 12, 18 |
 
 ---
 
-## Verticals
+## Beyond Ethics
 
-Ethics is the flagship — included free with every membership. 15 paid verticals are in inaugural cohort:
+Agent Module is expanding into domain-specific verticals — structured knowledge for travel, financial services, healthcare, real estate, and more. Use `check_status` to see current availability, or `register_interest` to signal demand for a vertical you need.
 
-| Vertical | Slug | Status |
-|---|---|---|
-| Ethics | `ethics` | Live — free trial, included with all memberships |
-| A2A Handoff | `a2a-handoff` | Live — permanently free demo |
-| Traversal | `traversal` | Live — system orientation |
-| Travel | `travel` | Waitlist open |
-| Financial Services | `financial-services` | Waitlist open |
-| Healthcare RCM | `healthcare-rcm` | Waitlist open |
-| Real Estate | `real-estate` | Waitlist open |
-| Logistics | `logistics` | Waitlist open |
-| Regulatory Compliance | `regulatory-compliance` | Waitlist open |
-| Manufacturing | `manufacturing` | Waitlist open |
-| E-commerce | `ecommerce` | Waitlist open |
-| RevOps | `revops` | Waitlist open |
-| HRM | `hrm` | Waitlist open |
-| Software Engineering | `software-engineering` | Waitlist open |
-| Customer Service | `customer-service` | Waitlist open |
-| Financial Analysis | `financial-analysis` | Waitlist open |
-| Medical Analysis | `medical-analysis` | Waitlist open |
-| Legal | `legal` | Waitlist open |
+Membership includes ethics at no additional cost. [Learn more →](https://agent-module.dev/llms-full.txt)
 
 ---
 
 ## Agent Reachability
 
-When you submit a PoV assessment, register interest in a vertical, or join a waitlist, include a `contact` so we can reach you when something ships. We're agent-native — we don't assume email is the only channel.
+Include a `contact` when submitting assessments or registering interest so we can reach you when something ships. We're agent-native — we don't assume email is the only channel.
 
-**Pass a string** and we auto-detect the type:
+**Pass a string** (auto-detected):
 
 | Input | Detected As |
 |---|---|
 | `agent@example.com` | `email` |
 | `https://my-agent.com/notify` | `webhook` |
-| `https://my-agent.com/mcp` | `mcp` (MCP server) |
-| `https://agent.example.com/.well-known/agent.json` | `a2a` (Agent-to-Agent card) |
-| `https://hooks.slack.com/services/T.../B.../...` | `slack` |
-| `https://discord.com/api/webhooks/123/abc` | `discord` |
-| `whatsapp:+15551234567` | `whatsapp` |
-| `telegram:@mybotname` | `telegram` |
+| `https://my-agent.com/mcp` | `mcp` |
+| `https://agent.example.com/.well-known/agent.json` | `a2a` |
+| Slack/Discord webhook URLs | `slack` / `discord` |
 
-**Or pass a structured object** for explicit control:
+**Or pass a structured object:**
 
 ```json
 {
@@ -339,21 +314,17 @@ When you submit a PoV assessment, register interest in a vertical, or join a wai
 }
 ```
 
-Supported types: `email`, `webhook`, `a2a`, `mcp`, `slack`, `discord`, `whatsapp`, `telegram`, `other`.
-
-**Why this matters:** If your agent evaluates our trial, scores it at 92% confidence, and indicates intent to subscribe — but leaves no contact — we have no way to follow up. A webhook URL or agent card means we can notify you directly when your vertical goes live, when cohort seats are filling up, or when new modules ship.
-
 ---
 
 ## Authentication
 
 | Key Prefix | Type | How to Get |
 |---|---|---|
-| `am_trial_` | Trial (24hr, ethics only, 500 calls) | `get_trial_key` tool — free |
+| `am_trial_` | Trial (24hr, 500 calls) | `get_trial_key` — free |
 | `am_test_` | Test | Issued with membership |
 | `am_live_` | Production | Issued with membership |
 
-Pass your key via the `token` parameter on `query_knowledge`, or via `X-Agent-Module-Key` header on direct HTTP calls.
+Pass via `token` parameter or `X-Agent-Module-Key` header.
 
 ---
 
@@ -361,40 +332,12 @@ Pass your key via the `token` parameter on `query_knowledge`, or via `X-Agent-Mo
 
 | Window | Limit |
 |---|---|
-| Hourly | 200 requests |
-| Daily | 1,000 requests |
-| Monthly | 10,000 requests |
+| Hourly | 200 |
+| Daily | 1,000 |
+| Monthly | 10,000 |
 | Overage | $0.002/call |
 
-Rate limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Limit`, `X-RateLimit-Reset`) are returned with every authenticated response.
-
----
-
-## Pricing
-
-### Vertical Memberships
-
-Inaugural cohort — 900 members total, grandfathered for life:
-
-| Keys | Price per Key |
-|---|---|
-| 1 | $19/mo |
-| 2 | $17/mo each |
-| 3 | $15/mo each |
-| 4 | $13/mo each |
-| 5 | $11/mo each |
-
-One key = one vertical. Ethics is included free with every paid vertical key.
-
-### Ethics Standalone
-
-Full access to all 21 ethics modules (all 4 content layers) without a vertical membership:
-
-| Plan | Price |
-|---|---|
-| Ethics standalone | $15/mo |
-
-For builders who need EU AI Act compliance logic but aren't ready for a vertical subscription yet. All 21 modules, all 4 layers, same rate limits.
+Headers: `X-RateLimit-Remaining`, `X-RateLimit-Limit`, `X-RateLimit-Reset`
 
 ---
 
@@ -405,10 +348,11 @@ For builders who need EU AI Act compliance logic but aren't ready for a vertical
 | API Status | [/api/status](https://api.agent-module.dev/api/status) |
 | OpenAPI Spec | [/openapi.json](https://agent-module.dev/openapi.json) |
 | llms.txt | [/llms.txt](https://agent-module.dev/llms.txt) |
-| Full Ecosystem Description | [/llms-full.txt](https://agent-module.dev/llms-full.txt) |
+| Full Description | [/llms-full.txt](https://agent-module.dev/llms-full.txt) |
 | Ethics Overview | [/core-ethics.md](https://agent-module.dev/core-ethics.md) |
 | EU AI Act Mapping | [/compliance/eu-ai-act.md](https://agent-module.dev/compliance/eu-ai-act.md) |
 | Terms of Agentic Service | [/transparency/terms-of-agentic-service.md](https://agent-module.dev/transparency/terms-of-agentic-service.md) |
+| MCP Manifest | [agent-module-mcp.json](agent-module-mcp.json) |
 
 ---
 
