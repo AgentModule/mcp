@@ -1,0 +1,33 @@
+{
+  "name": "@agentmodule/mcp",
+  "version": "0.9.7",
+  "description": "Agent Module MCP server — deterministic, vertical-specific knowledge infrastructure for autonomous agents. Remote endpoint at api.agent-module.dev/mcp.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agent",
+    "knowledge-base",
+    "rag",
+    "autonomous-agents",
+    "ai-tools"
+  ],
+  "homepage": "https://agent-module.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentModule/mcp"
+  },
+  "license": "MIT",
+  "author": "Agent Module <admin@agent-module.dev>",
+  "mcpName": "io.github.AgentModule/mcp",
+  "mcp": {
+    "type": "remote",
+    "url": "https://api.agent-module.dev/mcp",
+    "transport": "streamable-http"
+  },
+  "scripts": {
+    "start": "echo \"Agent Module MCP is a hosted endpoint. Connect to https://api.agent-module.dev/mcp\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
