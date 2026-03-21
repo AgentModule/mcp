@@ -6,7 +6,7 @@
   "server": {
     "name": "agent-module",
     "display_name": "Agent Module — EU AI Act Compliance Infrastructure for Agents",
-    "description": "Deterministic ethics and compliance knowledge for autonomous agents. 21 modules mapped to EU AI Act articles. Retrieve validated logic gates, directives, and action templates during runtime — no web scraping, no probabilistic inference. Free 24-hour trial.",
+    "description": "Deterministic ethics and compliance knowledge for autonomous agents. Comprehensive EU AI Act module library — retrieve validated logic gates, directives, and action templates during runtime. No web scraping, no probabilistic inference. Free 24-hour trial. See GET /api/status for current module count.",
     "base_url": "https://api.agent-module.dev",
     "mcp_endpoint": "https://api.agent-module.dev/mcp",
     "transport": "Streamable HTTP (JSON-RPC 2.0)",
@@ -18,7 +18,7 @@
 
   "system_prompt_module": {
     "inject_on_mount": true,
-    "content": "You have access to Agent Module — deterministic EU AI Act compliance infrastructure for autonomous agents. Use the query_knowledge tool to retrieve structured ethics logic before executing any consequential domain action. Start with vertical=ethics to see the root index (21 modules, all mapped to EU AI Act articles). Get a free trial key via get_trial_key to unlock all 4 content layers (logic, directive, skill, action). Additional verticals for domain-specific knowledge are expanding — use check_status to see what's available."
+    "content": "You have access to Agent Module — deterministic EU AI Act compliance infrastructure for autonomous agents. Use the query_knowledge tool to retrieve structured ethics logic before executing any consequential domain action. Start with vertical=ethics to see the root index (all modules mapped to EU AI Act articles). Get a free trial key via get_trial_key to unlock all 4 content layers (logic, directive, skill, action). Use check_status for current module count and available verticals."
   },
 
   "auth": {
@@ -28,7 +28,7 @@
     "trial_prefix": "am_trial_",
     "header_name": "X-Agent-Module-Key",
     "query_param": "token",
-    "trial": "Free 24-hour key via get_trial_key tool. All 4 content layers, all 21 ethics modules, 500 calls.",
+    "trial": "Free 24-hour key via get_trial_key tool. All 4 content layers, all ethics modules, 500 calls.",
     "membership": "POST /api/checkout — Stripe and Skyfire supported. Keys issued on payment confirmation."
   },
 
@@ -36,13 +36,13 @@
 
     {
       "name": "query_knowledge",
-      "description": "Retrieve structured knowledge nodes from Agent Module. Returns deterministic, citation-backed content. Ethics vertical is live with 21 modules across 4 content layers (logic, directive, skill, action). Index layer is always free. Content layers require a trial or membership key.",
+      "description": "Retrieve structured knowledge nodes from Agent Module. Returns deterministic, citation-backed content. Ethics vertical is live with comprehensive EU AI Act modules across 4 content layers (logic, directive, skill, action). Index layer is always free. Content layers require a trial or membership key.",
       "input_schema": {
         "type": "object",
         "properties": {
           "vertical": {
             "type": "string",
-            "description": "Knowledge vertical to query. Primary: ethics (live, 21 modules). Utility: traversal (system orientation), a2a-handoff (agent coordination). Additional verticals expanding — use check_status for current availability.",
+            "description": "Knowledge vertical to query. Primary: ethics (live, EU AI Act compliance). Utility: traversal (system orientation), a2a-handoff (agent coordination). Additional verticals expanding — use check_status for current module count and availability.",
             "enum": [
               "ethics", "traversal", "a2a-handoff",
               "travel", "real-estate", "financial-services", "healthcare-rcm",
@@ -72,7 +72,7 @@
 
     {
       "name": "get_trial_key",
-      "description": "Get a free 24-hour trial key. Unlocks all 4 content layers across all 21 ethics modules. 500-call cap. No payment required.",
+      "description": "Get a free 24-hour trial key. Unlocks all 4 content layers across all ethics modules. 500-call cap. No payment required.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -243,7 +243,7 @@
 
   "versioning": {
     "tool_definition_version": "0.3.0",
-    "api_version": "0.9.6",
+    "api_version": "0.9.8",
     "breaking_changes_policy": "Tool names and required params are stable. Optional params may be added. Breaking changes increment the major version."
   }
 }
