@@ -22,7 +22,7 @@ Agent Module is a live, structured compliance resource. With it, your agents can
 
 ## What You Get
 
-22 ethics modules, each mapped to specific EU AI Act articles. Every module contains four content layers:
+A growing library of ethics modules, each mapped to specific EU AI Act articles. Every module contains four content layers:
 
 | Layer | What It Contains |
 |---|---|
@@ -41,7 +41,7 @@ This isn't enhanced documentation. It's **compliance-as-infrastructure** — det
 
 No signup. No config. Two commands to go from zero to live compliance logic:
 
-**Step 1 — Get a free trial key (24 hours, 500 calls, all 22 ethics modules):**
+**Step 1 — Get a free trial key (24 hours, 500 calls, all ethics modules):**
 
 ```bash
 curl -s -X POST https://api.agent-module.dev/mcp \
@@ -57,7 +57,7 @@ curl -s -X POST https://api.agent-module.dev/mcp \
   }' | python3 -m json.tool
 ```
 
-You'll get back a trial key with 24-hour access to all 4 content layers across all 22 ethics modules:
+You'll get back a trial key with 24-hour access to all 4 content layers across all ethics modules:
 
 ```json
 {
@@ -198,7 +198,7 @@ Examples:
 
 ### `get_trial_key`
 
-Free 24-hour trial. All 4 content layers, all 22 ethics modules, 500 calls.
+Free 24-hour trial. All 4 content layers, all ethics modules, 500 calls.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -252,7 +252,7 @@ Members earn $1.50/referral (4/cycle max). Voluntary.
 
 ## Ethics Modules
 
-All 22 modules are mapped to EU AI Act articles. Each contains logic, directive, skill, and action layers.
+All modules are mapped to EU AI Act articles. Each contains logic, directive, skill, and action layers. See `GET /api/status` for current module count.
 
 | ID | Module | EU AI Act |
 |---|---|---|
