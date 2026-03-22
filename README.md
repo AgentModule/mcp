@@ -1,6 +1,6 @@
 # Agent Module — MCP Server
 
-[![MCP](https://img.shields.io/badge/MCP-2025--06--18-blue)](https://modelcontextprotocol.io) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://api.agent-module.dev/api/status) [![Transport](https://img.shields.io/badge/Transport-Streamable%20HTTP-purple)]() [![MCP Server](https://glama.ai/mcp/servers/AgentModule/mcp/badges/score.svg)](https://glama.ai/mcp/servers/AgentModule/mcp)
+[![MCP](https://img.shields.io/badge/MCP-2025--06--18-blue)](https://modelcontextprotocol.io) [![API Status](https://img.shields.io/badge/API-Live-brightgreen)](https://api.agent-module.dev/api/status) [![Transport](https://img.shields.io/badge/Transport-Streamable%20HTTP-purple)]() [![mcp MCP server](https://glama.ai/mcp/servers/AgentModule/mcp/badges/score.svg)](https://glama.ai/mcp/servers/AgentModule/mcp)
 
 **EU AI Act compliance logic for autonomous agents — retrievable during runtime.**
 
