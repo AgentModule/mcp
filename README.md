@@ -67,8 +67,7 @@ You'll get back a trial key with 24-hour access to all 4 content layers across a
   "duration": "24 hours",
   "call_cap": 500,
   "layers_unlocked": ["logic", "directive", "skill", "action"],
-  "vertical": "ethics",
-  "modules": 22
+  "vertical": "ethics"
 }
 ```
 
@@ -252,7 +251,7 @@ Members earn $1.50/referral (4/cycle max). Voluntary.
 
 ## Ethics Modules
 
-All modules are mapped to EU AI Act articles. Each contains logic, directive, skill, and action layers. See `GET /api/status` for current module count.
+All modules are mapped to EU AI Act articles. Each contains logic, directive, skill, and action layers.
 
 | ID | Module | EU AI Act |
 |---|---|---|
