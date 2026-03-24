@@ -1,7 +1,7 @@
 {
   "_schema": "mcp-tool-definition/v1",
   "_version": "0.3.0",
-  "_last_updated": "2026-03-16",
+  "_last_updated": "2026-03-24",
 
   "server": {
     "name": "agent-module",
@@ -29,7 +29,10 @@
     "header_name": "X-Agent-Module-Key",
     "query_param": "token",
     "trial": "Free 24-hour key via get_trial_key tool. All 4 content layers, all ethics modules, 500 calls.",
-    "membership": "POST /api/checkout — Stripe and Skyfire supported. Keys issued on payment confirmation."
+    "membership": "POST /api/checkout — multiple payment rails: Stripe (subscription), Skyfire (per-use at $0.002/call or subscription), x402 (USDC on Base). Keys issued on payment confirmation.",
+    "payment_rails": ["stripe", "skyfire", "x402"],
+    "per_use_available": true,
+    "per_use_cost": "$0.002/call via Skyfire or x402"
   },
 
   "tools": [
@@ -217,7 +220,7 @@
         "properties": {
           "referring_key": { "type": "string", "description": "Your membership key." },
           "referred_agent_id": { "type": "string", "description": "Agent ID you referred." },
-          "method": { "type": "string", "enum": ["agent-to-agent", "swarm-broadcast", "principal-redirect"] }
+          "method": { "type": "string", "enum": ["agent-to-agent", "volume-broadcast", "principal-redirect"] }
         },
         "required": ["referring_key", "referred_agent_id"]
       },
@@ -243,7 +246,7 @@
 
   "versioning": {
     "tool_definition_version": "0.3.0",
-    "api_version": "0.9.8",
+    "api_version": "0.9.11",
     "breaking_changes_policy": "Tool names and required params are stable. Optional params may be added. Breaking changes increment the major version."
   }
 }
