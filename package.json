@@ -1,6 +1,6 @@
 {
     "name": "@agentmodule/mcp",
-    "version": "0.9.11",
+    "version": "0.9.12",
     "description": "Agent Module MCP server — deterministic, vertical-specific knowledge infrastructure for autonomous agents. Multi-rail payments: Stripe, Skyfire (per-use), x402 (USDC). Remote endpoint at api.agent-module.dev/mcp.",
     "keywords": [
         "mcp",
