@@ -246,7 +246,7 @@
 
   "versioning": {
     "tool_definition_version": "0.3.0",
-    "api_version": "0.9.11",
+    "api_version": "0.9.12",
     "breaking_changes_policy": "Tool names and required params are stable. Optional params may be added. Breaking changes increment the major version."
   }
 }
