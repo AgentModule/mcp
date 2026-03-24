@@ -1,0 +1,15 @@
+# Smithery configuration for Agent Module MCP server
+startCommand:
+  type: http
+  url: https://api.agent-module.dev/mcp
+  configSchema:
+    type: object
+    properties:
+      X-Agent-Module-Key:
+        type: string
+        description: "Agent Module API key (am_live_, am_test_, or am_trial_ prefix). Optional — index browsing and trial key requests work without a key. Get a free trial: call the get_trial_key tool."
+        x-to:
+          header: X-Agent-Module-Key
+        x-from:
+          header: X-Agent-Module-Key
+    required: []
