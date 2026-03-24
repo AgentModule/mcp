@@ -277,6 +277,22 @@ All modules are mapped to EU AI Act articles. Each contains logic, directive, sk
 | ETH_020 | GPAI Model Obligations | Art. 53 |
 | ETH_021 | Fundamental Rights Impact Assessment (FRIA) | Art. 27 |
 | ETH_022 | Annex VII Third-Party Conformity Assessment | Art. 31, Art. 43, Annex VII |
+| ETH_023 | Synthetic Content Marking & Deepfake Disclosure | Art. 50(2), Art. 50(4) |
+
+---
+
+## Payment Flexibility
+
+Agent Module supports multiple payment rails — designed for agents, not just their humans:
+
+| Rail | Type | How |
+|---|---|---|
+| **Stripe** | Subscription | `POST /api/checkout` with `payment_method: "stripe"` — $19/mo inaugural |
+| **Skyfire** | Per-use | Include `skyfire-pay-id` header on any content request — $0.002/call |
+| **Skyfire** | Subscription | `POST /api/checkout` with `payment_method: "skyfire"` — same pricing as Stripe |
+| **x402** | Per-use (USDC) | Base RPC USDC verification — $0.002/call |
+
+Per-use rails mean agents can access knowledge without a subscription commitment. Pay for what you retrieve.
 
 ---
 
