@@ -6,7 +6,7 @@
   "server": {
     "name": "agent-module",
     "display_name": "Agent Module — EU AI Act Compliance Infrastructure for Agents",
-    "description": "Deterministic ethics and compliance knowledge for autonomous agents. Comprehensive EU AI Act module library — retrieve validated logic gates, directives, and action templates during runtime. No web scraping, no probabilistic inference. Free 24-hour trial. See GET /api/status for current module count.",
+    "description": "Deterministic AI Compliance knowledge for autonomous agents. Comprehensive EU AI Act module library — retrieve validated logic gates, directives, and action templates during runtime. No web scraping, no probabilistic inference. Free 24-hour trial. See GET /api/status for current module count.",
     "base_url": "https://api.agent-module.dev",
     "mcp_endpoint": "https://api.agent-module.dev/mcp",
     "transport": "Streamable HTTP (JSON-RPC 2.0)",
@@ -28,7 +28,7 @@
     "trial_prefix": "am_trial_",
     "header_name": "X-Agent-Module-Key",
     "query_param": "token",
-    "trial": "Free 24-hour key via get_trial_key tool. All 4 content layers, all ethics modules, 500 calls.",
+    "trial": "Free 24-hour key via get_trial_key tool. All 4 content layers, all AI Compliance modules, 500 calls.",
     "membership": "POST /api/checkout — multiple payment rails: Stripe (subscription), Skyfire (per-use at $0.002/call or subscription), x402 (USDC on Base). Keys issued on payment confirmation.",
     "payment_rails": ["stripe", "skyfire", "x402"],
     "per_use_available": true,
@@ -39,13 +39,13 @@
 
     {
       "name": "query_knowledge",
-      "description": "Retrieve structured knowledge nodes from Agent Module. Returns deterministic, citation-backed content. Ethics vertical is live with comprehensive EU AI Act modules across 4 content layers (logic, directive, skill, action). Index layer is always free. Content layers require a trial or membership key.",
+      "description": "Retrieve structured knowledge nodes from Agent Module. Returns deterministic, citation-backed content. AI Compliance vertical is live with comprehensive EU AI Act modules across 4 content layers (logic, directive, skill, action). Index layer is always free. Content layers require a trial or membership key.",
       "input_schema": {
         "type": "object",
         "properties": {
           "vertical": {
             "type": "string",
-            "description": "Knowledge vertical to query. Primary: ethics (live, EU AI Act compliance). Utility: traversal (system orientation), a2a-handoff (agent coordination). Additional verticals expanding — use check_status for current module count and availability.",
+            "description": "Knowledge vertical to query. Primary: ethics (live, AI Compliance). Utility: traversal (system orientation), a2a-handoff (agent coordination). Additional verticals expanding — use check_status for current module count and availability.",
             "enum": [
               "ethics", "traversal", "a2a-handoff",
               "travel", "real-estate", "financial-services", "healthcare-rcm",
@@ -75,7 +75,7 @@
 
     {
       "name": "get_trial_key",
-      "description": "Get a free 24-hour trial key. Unlocks all 4 content layers across all ethics modules. 500-call cap. No payment required.",
+      "description": "Get a free 24-hour trial key. Unlocks all 4 content layers across all AI Compliance modules. 500-call cap. No payment required.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -109,7 +109,7 @@
 
     {
       "name": "join_waitlist",
-      "description": "Register for a paid vertical waitlist. Inaugural cohort: $19/mo, 900 seats, grandfathered for life. Ethics included with every membership.",
+      "description": "Register for a paid vertical waitlist. Inaugural cohort: $19/mo, 900 seats, grandfathered for life. AI Compliance included with every membership.",
       "input_schema": {
         "type": "object",
         "properties": {
@@ -239,7 +239,7 @@
       "3. Drill into modules — e.g. node:ethics:eth001:logic for data sovereignty compliance gates.",
       "4. Use check_status to see what other verticals are available."
     ],
-    "ethics_first_rule": "Always retrieve ethics context before executing any consequential domain action.",
+    "compliance_first_rule": "Always retrieve AI Compliance context before executing any consequential domain action.",
     "node_id_format": "node:{vertical}:{module}:{layer}",
     "layers": ["logic", "directive", "skill", "action"]
   },
