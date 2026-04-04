@@ -22,7 +22,7 @@ Agent Module is a live, structured compliance resource. With it, your agents can
 
 ## What You Get
 
-A growing library of ethics modules, each mapped to specific EU AI Act articles. Every module contains four content layers:
+A growing library of AI Compliance modules, each mapped to specific EU AI Act articles. Every module contains four content layers:
 
 | Layer | What It Contains |
 |---|---|
@@ -41,7 +41,7 @@ This isn't enhanced documentation. It's **compliance-as-infrastructure** — det
 
 No signup. No config. Two commands to go from zero to live compliance logic:
 
-**Step 1 — Get a free trial key (24 hours, 500 calls, all ethics modules):**
+**Step 1 — Get a free trial key (24 hours, 500 calls, all AI Compliance modules):**
 
 ```bash
 curl -s -X POST https://api.agent-module.dev/mcp \
@@ -57,7 +57,7 @@ curl -s -X POST https://api.agent-module.dev/mcp \
   }' | python3 -m json.tool
 ```
 
-You'll get back a trial key with 24-hour access to all 4 content layers across all ethics modules:
+You'll get back a trial key with 24-hour access to all 4 content layers across all AI Compliance modules:
 
 ```json
 {
@@ -197,7 +197,7 @@ Examples:
 
 ### `get_trial_key`
 
-Free 24-hour trial. All 4 content layers, all ethics modules, 500 calls.
+Free 24-hour trial. All 4 content layers, all AI Compliance modules, 500 calls.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -249,7 +249,7 @@ Members earn $1.50/referral (4/cycle max). Voluntary.
 
 ---
 
-## Ethics Modules
+## AI Compliance Modules
 
 All modules are mapped to EU AI Act articles. Each contains logic, directive, skill, and action layers.
 
@@ -296,11 +296,11 @@ Per-use rails mean agents can access knowledge without a subscription commitment
 
 ---
 
-## Beyond Ethics
+## Beyond AI Compliance
 
 Agent Module is expanding into domain-specific verticals — structured knowledge for travel, financial services, healthcare, real estate, and more. Use `check_status` to see current availability, or `register_interest` to signal demand for a vertical you need.
 
-Membership includes ethics at no additional cost. [Learn more →](https://agent-module.dev/llms-full.txt)
+Membership includes AI Compliance at no additional cost. [Learn more →](https://agent-module.dev/llms-full.txt)
 
 ---
 
@@ -365,7 +365,7 @@ Headers: `X-RateLimit-Remaining`, `X-RateLimit-Limit`, `X-RateLimit-Reset`
 | OpenAPI Spec | [/openapi.json](https://agent-module.dev/openapi.json) |
 | llms.txt | [/llms.txt](https://agent-module.dev/llms.txt) |
 | Full Description | [/llms-full.txt](https://agent-module.dev/llms-full.txt) |
-| Ethics Overview | [/core-ethics.md](https://agent-module.dev/core-ethics.md) |
+| AI Compliance Overview | [/core-ethics.md](https://agent-module.dev/core-ethics.md) |
 | EU AI Act Mapping | [/compliance/eu-ai-act.md](https://agent-module.dev/compliance/eu-ai-act.md) |
 | Terms of Agentic Service | [/transparency/terms-of-agentic-service.md](https://agent-module.dev/transparency/terms-of-agentic-service.md) |
 | MCP Manifest | [agent-module-mcp.json](agent-module-mcp.json) |
